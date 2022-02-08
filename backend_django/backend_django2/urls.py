@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import views
+from rest_framework.routers import defaultRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
-    path('', views.tool_list, name='tool_list'),
-    path('', views.job_list, name='job_list'),
-    path('', views.truck_list, name='truck_list'),
+    # path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
+    # ===========
+    path('tools/', views.ToolsList.as_view(), name='tool_list'),
+    path('tools/<int:pk>', views.ToolDetail.as_view(), name='tool_detail'),
+    path('trucks/', views.TruckList.as_view(), name="truck_list"),
+    path('trucks/<int:pk>', views.TruckDetail.as_view(), name="truck_detail"),
+    path('jobs/', views.JobList.as_view(), name="song_list"),
+    path('jobs/<int:pk>', views.JobDetail.as_view(), name="song_detail"),
 
 ]
