@@ -1,0 +1,4 @@
+-- settings.sql
+CREATE DATABASE django2;
+CREATE USER admin WITH PASSWORD 'admin';
+GRANT ALL PRIVILEGES ON DATABASE django2 TO admin;
