@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Truck, Tool, Job
 # Create your views here.
 # views.py
@@ -18,3 +18,6 @@ def job_list(request):
     jobs = Job.objects.all().values('suggested_tools', 'address', 'scheduled', 'comments') 
     jobs_list = list(jobs) 
     return JsonResponse(jobs_list, safe=False)
+
+def job_detail
+def truck_detail
