@@ -7,3 +7,4 @@ from .models import Job
 admin.site.register(Truck)
 admin.site.register(Tool)
 admin.site.register(Job)
+
