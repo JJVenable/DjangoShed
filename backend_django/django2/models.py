@@ -2,6 +2,10 @@ from django.db import models
 
 # Create your models here.
 class Truck(models.Model):
+  # # 6-7 are test lines
+  # tool = models.ManyToManyField(
+  #   Tool, related_name='trucks', blank=True  )
+    
   number = models.CharField(max_length=3, default="Not assigned")
   key = models.CharField(max_length=10)
   drivers = models.CharField(max_length=50)
@@ -9,7 +13,6 @@ class Truck(models.Model):
 
   def __str__(self):
     return self.number
-
 
 class Job(models.Model):
   truck = models.ManyToManyField(
