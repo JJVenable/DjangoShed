@@ -1,12 +1,12 @@
-# from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect
 from rest_framework import generics
 from .models import Truck, Tool, Job
-# from .forms import TruckForm, ToolForm, JobForm
+from .forms import TruckForm, ToolForm, JobForm
 from .serializers import TruckSerializer, ToolSerializer, JobSerializer
 
 # Create your views here.
 # views.py
-from django.http import JsonResponse
+# from django.http import JsonResponse
 
 
 class TruckList(generics.ListCreateAPIView):
