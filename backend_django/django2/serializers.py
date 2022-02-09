@@ -14,7 +14,7 @@ class TruckSerializer(serializers.HyperlinkedModelSerializer):
     )
     class Meta: 
       model = Truck
-      fields = ('number', 'drivers', 'notes')
+      fields = ('number', 'drivers', 'notes',)
   
 class ToolSerializer(serializers.HyperlinkedModelSerializer):
     trucks = serializers.HyperlinkedRelatedField(
@@ -24,7 +24,7 @@ class ToolSerializer(serializers.HyperlinkedModelSerializer):
     )
     class Meta: 
       model = Tool
-      fields = ('name', 'notes')
+      fields = ('name', 'notes','trucks')
   
   
 class JobSerializer(serializers.HyperlinkedModelSerializer):
