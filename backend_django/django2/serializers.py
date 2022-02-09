@@ -2,38 +2,38 @@ from rest_framework import serializers
 from .models import Tool, Truck, Job  
 
 class TruckSerializer(serializers.HyperlinkedModelSerializer):
-    jobs = serializers.HyperlinkedRelatedField(
+    job = serializers.HyperlinkedRelatedField(
         view_name='job_detail',
         many=True,
         read_only=True
     )
-    tools = serializers.HyperlinkedRelatedField(
+    tool = serializers.HyperlinkedRelatedField(
         view_name='tool_detail',
         many=True,
         read_only=True
     )
     class Meta: 
       model = Truck
-      fields = ('number', 'drivers', 'notes',)
+      fields = ('id','number', 'drivers', 'notes', 'tool', 'job')
   
 class ToolSerializer(serializers.HyperlinkedModelSerializer):
-    trucks = serializers.HyperlinkedRelatedField(
+    truck = serializers.HyperlinkedRelatedField(
         view_name='truck_detail',
         many=True,
         read_only=True
     )
     class Meta: 
       model = Tool
-      fields = ('name', 'notes','trucks')
+      fields = ('id','name', 'notes','truck')
   
   
 class JobSerializer(serializers.HyperlinkedModelSerializer):
-    trucks = serializers.HyperlinkedRelatedField(
+    truck = serializers.HyperlinkedRelatedField(
         view_name='truck_detail',
         many=True,
         read_only=True
     )
     class Meta: 
       model = Job
-      fields = ('suggested_tools', 'address', 'scheduled', 'comments')
+      fields = ('id', 'suggested_tools', 'address', 'scheduled', 'comments', 'truck')
   
