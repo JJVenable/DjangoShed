@@ -13,9 +13,9 @@ class Truck(models.Model):
 class Job(models.Model):
   truck = models.ManyToManyField(
     Truck, related_name='jobs', blank=True  )
-  suggested_tools = models.CharField(max_length=1000)
-  address = models.TextField()
-  scheduled = models.TextField()
+  suggested_tools = models.CharField(max_length=1000, blank=True)
+  address = models.TextField(blank=True)
+  scheduled = models.TextField(blank=True)
   comments = models.TextField(blank=True, ) 
   job_number = models.TextField(default="Not specified")
 
