@@ -132,6 +132,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# for auth later
 # REST_FRAMEWORK = {
 #     # Use Django's standard `django.contrib.auth` permissions,
 #     # or allow read-only access for unauthenticated users.
