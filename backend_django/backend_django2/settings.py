@@ -1,3 +1,10 @@
+# At the top of the settings.py file add:
+import django_heroku
+
+import os
+import dj_database_url
+
+
 """
 Django settings for backend_django2 project.
 
@@ -20,18 +27,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ddsakj75g#9rg4-!@b%9oayb=4l_4kwnb)ca_tsq#7+=yes5nl'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = True if os.environ['MODE'] == 'dev' else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://jvtoolshed.surge.sh'
+    #add front end once deployed
 ]
+# CORS_ALLOW_ALL_ALL_ORIGINS = True
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +58,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # 57 added @deploy
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -76,9 +90,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend_django2.wsgi.application'
 
+# Configure your database URL so that it is in the same format as the one that Heroku sets
+#  by adding a DATABASE_URL variable in the following format 
+# DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/NAME. 
+# Replace the USER, PASSWORD and database NAME with your project specific values. 
+# We'll use the default port for PostgreSQL on PORT 5432:
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+#below attempt at block 89-93 instructions
+# DATABASE_URL='postgres://admin:admin@localhost:5432/django2',
 
 DATABASES = {
     'default': {
@@ -89,7 +110,9 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
-
+# DATABASES = {
+#   'default': dj_database_url.config(conn_max_age=600)
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -140,3 +163,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 #     ]
 # }
+STATIC_ROOT=os.path.join(BASE_DIR, "static/")
+
+django_heroku.settings(locals())
